@@ -32,7 +32,7 @@ export function ProgressScreen({ user }: { user: LearnerProfile }) {
 
       {/* Activity Chart */}
       <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
           <h2 className="font-bold text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>XP Activity</h2>
           <div className="flex gap-1 bg-muted rounded-lg p-1">
             {(["week", "month"] as const).map(p => (
@@ -77,7 +77,7 @@ export function ProgressScreen({ user }: { user: LearnerProfile }) {
             </div>
           ))}
         </div>
-        <div className="flex gap-3 mt-4">
+        <div className="flex flex-wrap gap-3 mt-4">
           {[["Strong", "#16A34A"], ["Building", "#E8602C"], ["Focus Here", "#FABC2A"]].map(([l, c]) => (
             <div key={l} className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: c as string }} />
@@ -116,7 +116,7 @@ export function ProgressScreen({ user }: { user: LearnerProfile }) {
             );
           })}
         </div>
-        <div className="flex items-center justify-between mt-3 text-xs text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs text-muted-foreground">
           <span>4 weeks ago</span>
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded bg-muted" /><span>None</span>

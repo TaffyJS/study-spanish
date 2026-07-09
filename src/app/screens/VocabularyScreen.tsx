@@ -30,12 +30,12 @@ export function VocabularyScreen({ audioEnabled = true }: { audioEnabled?: boole
 
       {/* Overall Progress */}
       <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between gap-3 mb-2">
           <span className="font-semibold text-sm text-foreground">Overall Progress</span>
           <span className="text-sm font-bold text-primary">{learnedCount} / {vocabWords.length}</span>
         </div>
         <XPBar current={learnedCount} max={vocabWords.length} />
-        <div className="flex gap-4 mt-3">
+        <div className="grid grid-cols-3 gap-2 mt-3 sm:flex sm:gap-4">
           {[
             { label: "Learned", count: learnedCount, color: "text-green-600" },
             { label: "Saved", count: savedCount, color: "text-yellow-600" },
@@ -81,7 +81,7 @@ export function VocabularyScreen({ audioEnabled = true }: { audioEnabled?: boole
         {filtered.map((w) => (
           <div key={w.word} className={`bg-card border rounded-2xl p-4 shadow-sm transition-all hover:shadow-md ${known.has(w.word) ? "border-green-100 dark:border-green-900" : "border-border"}`}>
             <div className="flex items-start justify-between gap-2">
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="font-extrabold text-foreground text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{w.word}</h3>
                   <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">{w.pos}</span>

@@ -67,15 +67,15 @@ export function PracticeScreen({ audioEnabled = true }: { audioEnabled?: boolean
           <div className="text-5xl mb-3">🎯</div>
           <h1 className="text-2xl font-extrabold text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{session.title} complete</h1>
           <p className="text-sm text-muted-foreground mt-1">You answered {correctCount} of {session.questions.length} correctly.</p>
-          <div className="grid grid-cols-3 gap-3 mt-5">
+          <div className="grid grid-cols-3 gap-2 mt-5 sm:gap-3">
             {[["Accuracy", `${accuracy}%`], ["Questions", session.questions.length], ["Review", session.questions.length - correctCount]].map(([label, value]) => (
-              <div key={label} className="rounded-2xl bg-muted/60 p-4">
-                <p className="text-xl font-extrabold text-foreground">{value}</p>
+              <div key={label} className="rounded-2xl bg-muted/60 p-3 sm:p-4">
+                <p className="text-lg font-extrabold text-foreground sm:text-xl">{value}</p>
                 <p className="text-xs text-muted-foreground">{label}</p>
               </div>
             ))}
           </div>
-          <div className="flex gap-3 mt-6">
+          <div className="flex flex-col gap-3 mt-6 min-[380px]:flex-row">
             <button onClick={() => startSession(session.id, scenario ?? undefined)} className="flex-1 rounded-2xl bg-muted text-foreground py-3 text-sm font-bold hover:bg-muted/80 transition-colors">
               Practice Again
             </button>
@@ -189,7 +189,7 @@ export function PracticeScreen({ audioEnabled = true }: { audioEnabled?: boolean
               <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${practice.color}`}>
                 <practice.icon size={20} />
               </div>
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{practice.label}</p>
                 <p className="text-xs text-muted-foreground mt-0.5">{practice.desc}</p>
                 <p className="text-xs font-semibold text-primary mt-2 inline-flex items-center gap-1">
@@ -217,7 +217,7 @@ export function PracticeScreen({ audioEnabled = true }: { audioEnabled?: boolean
               <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
                 <scenarioItem.icon size={22} className="text-primary" />
               </div>
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <p className="font-bold text-foreground group-hover:text-primary transition-colors" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{scenarioItem.label}</p>
                 <div className="flex items-center gap-2 mt-1">
                   <Badge label={scenarioItem.level} />
@@ -235,7 +235,7 @@ export function PracticeScreen({ audioEnabled = true }: { audioEnabled?: boolean
           <div className="w-12 h-12 rounded-2xl bg-orange-100 dark:bg-orange-900/50 flex items-center justify-center flex-shrink-0">
             <RotateCcw size={22} className="text-orange-600 dark:text-orange-400" />
           </div>
-          <div>
+          <div className="min-w-0">
             <h3 className="font-bold text-foreground text-base mb-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Everything Saves as Review</h3>
             <p className="text-sm text-muted-foreground">Every answer includes a correction, so wrong answers feel like useful review rather than a dead end.</p>
           </div>

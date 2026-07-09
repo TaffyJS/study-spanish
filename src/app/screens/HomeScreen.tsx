@@ -56,28 +56,28 @@ export function HomeScreen({
   const nextLessonIndex = a1Lessons.findIndex(lesson => lesson.id === nextRoadmapLesson.id) + 1;
 
   return (
-    <div className="p-4 md:p-6 max-w-4xl mx-auto space-y-5">
+    <div className="mx-auto max-w-4xl space-y-5 p-4 min-[380px]:p-5 md:p-6">
       {/* Welcome Banner */}
       <div className="relative rounded-3xl overflow-hidden" style={{ background: "linear-gradient(135deg, #E8602C 0%, #F47A4A 40%, #FABC2A 100%)" }}>
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
         <div className="relative p-6 md:p-8">
           <div className="flex items-start justify-between flex-wrap gap-4">
-            <div>
+            <div className="min-w-0">
               <p className="text-white/80 text-sm font-medium mb-1">¡Buenos días!</p>
               <h1 className="text-2xl md:text-3xl font-extrabold text-white mb-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 Hola, {user.name}! 👋
               </h1>
               <p className="text-white/70 text-sm">Level {user.level} · {user.levelLabel}</p>
             </div>
-            <div className="flex gap-3">
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 text-center">
-                <div className="flex items-center gap-1 text-white font-bold text-lg">
+            <div className="grid w-full grid-cols-2 gap-3 min-[430px]:flex min-[430px]:w-auto">
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-3 py-3 text-center sm:px-4">
+                <div className="flex items-center justify-center gap-1 text-white font-bold text-lg">
                   <Flame size={18} className="text-yellow-300" />{user.streak}
                 </div>
                 <p className="text-white/70 text-xs">day streak</p>
               </div>
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 text-center">
-                <div className="flex items-center gap-1 text-white font-bold text-lg">
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-3 py-3 text-center sm:px-4">
+                <div className="flex items-center justify-center gap-1 text-white font-bold text-lg">
                   <Star size={18} className="text-yellow-300" />{user.xp.toLocaleString()}
                 </div>
                 <p className="text-white/70 text-xs">XP total</p>
@@ -98,25 +98,25 @@ export function HomeScreen({
 
       {/* Continue Learning CTA */}
       <button onClick={() => onLesson(nextRoadmapLesson.id)} className="w-full group relative rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]" style={{ background: "linear-gradient(135deg, #1C1917 0%, #3D2C1E 100%)" }}>
-        <div className="px-6 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
+        <div className="flex flex-col gap-4 px-4 py-5 min-[430px]:flex-row min-[430px]:items-center min-[430px]:justify-between sm:px-6">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+            <div className="w-12 h-12 shrink-0 rounded-xl bg-primary/20 flex items-center justify-center">
               <Play size={22} className="text-primary ml-0.5" />
             </div>
-            <div className="text-left">
+            <div className="min-w-0 text-left">
               <p className="text-white/60 text-xs mb-0.5">Current Lesson</p>
               <p className="text-white font-bold text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{nextLesson.title}</p>
               <p className="text-white/50 text-xs mt-0.5">{nextLesson.level} · Lesson {nextLessonIndex} of {a1Lessons.length} · ~{nextLesson.duration}</p>
             </div>
           </div>
-          <div className="bg-primary text-white rounded-xl px-4 py-2 text-sm font-semibold group-hover:bg-orange-500 transition-colors flex items-center gap-1.5">
+          <div className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors group-hover:bg-orange-500 min-[430px]:w-auto">
             Continue <ArrowRight size={14} />
           </div>
         </div>
       </button>
 
       {/* Daily Goal + Week Streak */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
           <p className="text-xs text-muted-foreground font-medium mb-3">Daily Goal</p>
           <div className="flex items-center gap-3">
@@ -126,7 +126,7 @@ export function HomeScreen({
                 <span className="text-sm font-bold text-foreground">{Math.round(goalPct)}%</span>
               </div>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-foreground font-bold text-xl">{user.dailyDone}<span className="text-muted-foreground text-sm font-normal">/{user.dailyGoal}m</span></p>
               <p className="text-xs text-muted-foreground">{user.dailyGoal - user.dailyDone} min left today</p>
             </div>
@@ -134,10 +134,10 @@ export function HomeScreen({
         </div>
         <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
           <p className="text-xs text-muted-foreground font-medium mb-3">This Week</p>
-          <div className="flex gap-1.5 justify-between">
+          <div className="grid grid-cols-7 gap-1.5">
             {weekDays.map((d, i) => (
               <div key={i} className="flex flex-col items-center gap-1.5">
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${weekActivity[i] ? "bg-primary shadow-sm" : "bg-muted"}`}>
+                <div className={`h-7 w-7 rounded-full flex items-center justify-center transition-all ${weekActivity[i] ? "bg-primary shadow-sm" : "bg-muted"}`}>
                   {weekActivity[i] && <Check size={13} className="text-white" />}
                 </div>
                 <span className="text-xs text-muted-foreground">{d}</span>

@@ -182,9 +182,9 @@ export function ChallengesScreen({ onLesson, onNavigate }: ChallengesScreenProps
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${c.bg}`}>
                 <c.icon size={22} className={c.color} />
               </div>
-              <div className="flex-1">
-                <div className="flex items-start justify-between gap-2">
-                  <div>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <div className="min-w-0">
                     <h3 className="font-bold text-foreground text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{c.title}</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">{c.desc}</p>
                   </div>

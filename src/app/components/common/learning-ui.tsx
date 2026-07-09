@@ -5,7 +5,7 @@ export function ProgressRing({ value, max, size = 80, stroke = 8, color = "#E860
   const circ = 2 * Math.PI * r;
   const fill = (value / max) * circ;
   return (
-    <svg width={size} height={size} className="rotate-[-90deg]">
+    <svg width={size} height={size} className="shrink-0 rotate-[-90deg]">
       <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="currentColor" strokeWidth={stroke} className="text-muted" />
       <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth={stroke} strokeDasharray={`${fill} ${circ}`} strokeLinecap="round" className="transition-all duration-700" />
     </svg>
@@ -36,13 +36,13 @@ export function PageHeader({ title, description }: { title: string; description:
 
 export function StatCard({ value, label, icon: Icon, color }: { value: string | number; label: string; icon: ElementType; color: string }) {
   return (
-    <div className="bg-card rounded-2xl p-4 border border-border flex items-center gap-3 shadow-sm">
-      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
+    <div className="bg-card rounded-2xl p-4 border border-border flex min-w-0 items-center gap-3 shadow-sm">
+      <div className={`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center ${color}`}>
         <Icon size={18} />
       </div>
-      <div>
-        <div className="text-xl font-bold text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{value}</div>
-        <div className="text-xs text-muted-foreground">{label}</div>
+      <div className="min-w-0">
+        <div className="truncate text-xl font-bold text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{value}</div>
+        <div className="text-xs leading-tight text-muted-foreground">{label}</div>
       </div>
     </div>
   );

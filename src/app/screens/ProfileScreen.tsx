@@ -24,7 +24,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: () => void 
 function SelectControl<T extends string>({ value, options, onChange }: { value: T; options: T[]; onChange: (value: T) => void }) {
   return (
     <select value={value} onChange={event => onChange(event.target.value as T)}
-      className="rounded-xl border border-border bg-input-background px-3 py-2 text-sm font-semibold text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20">
+      className="max-w-full rounded-xl border border-border bg-input-background px-3 py-2 text-sm font-semibold text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20">
       {options.map(option => <option key={option} value={option}>{option}</option>)}
     </select>
   );
@@ -33,9 +33,9 @@ function SelectControl<T extends string>({ value, options, onChange }: { value: 
 function Stepper({ value, suffix, min, max, step, onChange }: { value: number; suffix: string; min: number; max: number; step: number; onChange: (value: number) => void }) {
   const set = (next: number) => onChange(Math.min(max, Math.max(min, next)));
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex shrink-0 items-center gap-2">
       <button onClick={() => set(value - step)} className="w-8 h-8 rounded-lg bg-muted text-foreground font-bold hover:bg-secondary">-</button>
-      <div className="min-w-24 text-center">
+      <div className="min-w-20 text-center sm:min-w-24">
         <p className="text-sm font-bold text-foreground">{value}</p>
         <p className="text-[10px] text-muted-foreground">{suffix}</p>
       </div>
@@ -70,8 +70,8 @@ export function ProfileScreen({ darkMode, setDarkMode, user, settings, onUserCha
 
   return (
     <div className="p-4 md:p-6 max-w-2xl mx-auto space-y-5">
-      <div className="bg-card border border-border rounded-3xl p-6 shadow-sm flex items-center gap-5">
-        <img src={user.avatar} alt="Profile" className="w-20 h-20 rounded-2xl object-cover bg-muted" />
+      <div className="bg-card border border-border rounded-3xl p-5 shadow-sm flex items-center gap-4 sm:gap-5 sm:p-6">
+        <img src={user.avatar} alt="Profile" className="w-16 h-16 rounded-2xl object-cover bg-muted sm:h-20 sm:w-20" />
         <div className="flex-1 min-w-0">
           <h1 className="text-xl font-extrabold text-foreground truncate" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{user.name}</h1>
           <p className="text-muted-foreground text-sm truncate">@{user.username}</p>
@@ -84,10 +84,10 @@ export function ProfileScreen({ darkMode, setDarkMode, user, settings, onUserCha
         <button onClick={openEdit} className="p-2 rounded-xl hover:bg-muted transition-colors text-muted-foreground" aria-label="Edit profile"><Pencil size={16} /></button>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 text-center">
+      <div className="grid grid-cols-3 gap-2 text-center sm:gap-3">
         {[["XP", user.xp.toLocaleString()], ["Words", user.wordsLearned], ["Lessons", user.lessonsCompleted]].map(([l, v]) => (
-          <div key={String(l)} className="bg-card border border-border rounded-2xl p-4 shadow-sm">
-            <p className="text-xl font-extrabold text-foreground">{v}</p>
+          <div key={String(l)} className="bg-card border border-border rounded-2xl p-3 shadow-sm sm:p-4">
+            <p className="truncate text-lg font-extrabold text-foreground sm:text-xl">{v}</p>
             <p className="text-xs text-muted-foreground mt-0.5">{l}</p>
           </div>
         ))}
@@ -97,19 +97,19 @@ export function ProfileScreen({ darkMode, setDarkMode, user, settings, onUserCha
         <div className="px-5 py-4 border-b border-border">
           <h2 className="font-bold text-foreground text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Learning Preferences</h2>
         </div>
-        <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-border">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b border-border">
           <span className="text-sm text-foreground">Daily Study Goal</span>
           <Stepper value={settings.dailyStudyGoal} suffix="minutes" min={5} max={120} step={5} onChange={value => onSettingsChange({ dailyStudyGoal: value })} />
         </div>
-        <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-border">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b border-border">
           <span className="text-sm text-foreground">Daily Word Goal</span>
           <Stepper value={settings.dailyWordGoal} suffix="words" min={1} max={100} step={1} onChange={value => onSettingsChange({ dailyWordGoal: value })} />
         </div>
-        <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-border">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b border-border">
           <span className="text-sm text-foreground">Spanish Region</span>
           <SelectControl value={settings.spanishRegion} options={["Latin American", "Spain", "Mixed"]} onChange={value => onSettingsChange({ spanishRegion: value })} />
         </div>
-        <div className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
           <span className="text-sm text-foreground">Learning Goal</span>
           <SelectControl value={settings.learningGoal} options={["General Fluency", "Travel", "Work", "School", "Conversation"]} onChange={value => onSettingsChange({ learningGoal: value })} />
         </div>
@@ -136,7 +136,7 @@ export function ProfileScreen({ darkMode, setDarkMode, user, settings, onUserCha
             <Toggle checked={settings.audio} onChange={() => onSettingsChange({ audio: !settings.audio })} />
           </div>
         </div>
-        <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-border">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b border-border">
           <div className="flex items-center gap-3">
             <Settings size={16} className="text-muted-foreground" />
             <span className="text-sm text-foreground">Accessibility</span>

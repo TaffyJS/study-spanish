@@ -92,12 +92,12 @@ function MobileNav({ activeNav, onNavigate }: Pick<AppShellProps, "activeNav" | 
           const active = activeNav === id;
           return (
             <button key={id} onClick={() => onNavigate(id)}
-              className={`flex-1 flex flex-col items-center gap-1 py-3 transition-all ${active ? "text-primary" : "text-muted-foreground"}`}>
+              className={`min-w-0 flex-1 flex flex-col items-center gap-1 px-0.5 py-3 transition-all ${active ? "text-primary" : "text-muted-foreground"}`}>
               <div className={`relative ${active ? "scale-110" : ""} transition-transform`}>
                 <Icon size={20} strokeWidth={active ? 2.5 : 1.8} />
                 {id === "challenges" && <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-primary text-white text-[8px] flex items-center justify-center font-bold">3</span>}
               </div>
-              <span className={`text-[9px] font-semibold ${active ? "text-primary" : ""}`}>{label}</span>
+              <span className={`w-full truncate text-center text-[8px] font-semibold leading-tight sm:text-[9px] ${active ? "text-primary" : ""}`}>{label}</span>
             </button>
           );
         })}
@@ -110,7 +110,7 @@ export function AppShell({ activeNav, darkMode, user, onDarkModeChange, onNaviga
   return (
     <div className={`${darkMode ? "dark" : ""} flex h-screen overflow-hidden bg-background`} style={{ fontFamily: "'Nunito', sans-serif" }}>
       <Sidebar activeNav={activeNav} darkMode={darkMode} user={user} onDarkModeChange={onDarkModeChange} onNavigate={onNavigate} />
-      <main className="flex-1 overflow-y-auto pb-20 md:pb-0 scrollbar-hide">
+      <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto pb-20 md:pb-0 scrollbar-hide">
         {children}
       </main>
       <MobileNav activeNav={activeNav} onNavigate={onNavigate} />
